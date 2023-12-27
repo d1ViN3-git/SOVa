@@ -1,4 +1,3 @@
-
 from scapy.layers.inet import IP
 from scapy.layers.inet import TCP
 from scapy.layers.inet import UDP
@@ -20,10 +19,10 @@ def detect_packet_flooding(packet):
         if packet_counts[source_ip] > 800:
             packet_counts[source_ip] = 0
             name = "big_counts_of_packets_from_ip"
-            desc = "Обнаружено аномально большое количество пакетов от источника {source_ip}!"
+            desc = f"Обнаружено аномально большое количество пакетов от источника {source_ip}!"
             print(f"Обнаружено аномально большое количество пакетов от источника {source_ip}!")
             logg.info(f"{name}")
-            #send_post_request(source_ip, name, desc)
+            send_post_request(source_ip, name, desc)
 
 
 
@@ -38,7 +37,7 @@ def detect_packet_size_anomaly(packet):
             desc = "Обнаружен аномальный размер пакета!"
             print(f"Обнаружен аномальный размер пакета!")
             logg.info(f"{name}")
-            #send_post_request(source_ip, name, desc)
+            send_post_request(source_ip, name, desc)
 
 
 
@@ -56,7 +55,7 @@ def detect_packet_spacing_anomaly(packet):
             desc = f"Обнаружен аномальный интервал между пакетами от источника {source_ip}!"
             print(f"Обнаружен аномальный интервал между пакетами от источника {source_ip}!")
             logg.info(f"{name}")
-            #send_post_request(source_ip, name, desc)
+            send_post_request(source_ip, name, desc)
             last_packet_time[source_ip] = current_time
 
 
@@ -75,7 +74,7 @@ def detect_port_connection_anomaly(packet):
             desc = f"Обнаружено аномально большое количество соединений к порту {dst_port}!"
             print(f"Обнаружено аномально большое количество соединений к порту {dst_port}!")
             logg.info(f"{name}")
-            #send_post_request(source_ip, name, desc)
+            send_post_request(source_ip, name, desc)
             port_connections[dst_port] = 0
 
 
@@ -91,7 +90,7 @@ def detect_icmp_packet_flooding(packet):
             desc = f"Обнаружено аномально большое количество ICMP-пакетов от источника {source_ip}!"
             print(f"Обнаружено аномально большое количество ICMP-пакетов от источника {source_ip}!")
             logg.info(f"{name}")
-            #send_post_request(source_ip,name, desc)
+            send_post_request(source_ip,name, desc)
             icmp_packet_counts[source_ip] = 0
 
 
@@ -110,7 +109,7 @@ def detect_udp_packet_anomaly(packet):
                 desc = f"Обнаружено аномально большое количество UDP-пакетов на порту {dst_port}!"
                 print(f"Обнаружено аномально большое количество UDP-пакетов на порту {dst_port}!")
                 logg.info(f"{name}")
-                #send_post_request(source_ip, name, desc)
+                send_post_request(source_ip, name, desc)
                 udp_port_packets[dst_port] = 0
 
 
@@ -126,7 +125,7 @@ def detect_large_udp_packets(packet):
                 desc = f"Обнаружен аномально большой UDP-пакет размером {udp_payload_len} байт!"
                 print(f"Обнаружен аномально большой UDP-пакет размером {udp_payload_len} байт!")
                 logg.info(f"{name}")
-                #send_post_request(source_ip, name, desc)
+                send_post_request(source_ip, name, desc)
 
 
 #SYN флуд
@@ -144,7 +143,7 @@ def analyze_syn_traffic(packet):
             desc = f"Обнаружен SYN flood от {source_ip}!"
             print(f"Обнаружен SYN flood от {source_ip}!")
             logg.info(f"{name}")
-            #send_post_request(source_ip, name, desc)
+            send_post_request(source_ip, name, desc)
             SYN_count[source_ip] = 0
 
 
@@ -160,7 +159,7 @@ def analyze_icmp(packet):
                 desc = "Обнаружен ICMP ping of death"
                 print("Обнаружен ICMP ping of death")
                 logg.info(f"{name}")
-                #send_post_request(source_ip,name, desc)
+                send_post_request(source_ip, name, desc)
 
 
 #FIN RST
@@ -173,5 +172,5 @@ def analyze_tcp_flags(packet):
             desc = "Обнаружен TCP пакет с фалагами FIN RST"
             print("Обнаружен TCP пакет с фалагами FIN RST")
             logg.info(f"{name}")
-            #send_post_request(source_ip, name, desc)
+            send_post_request(source_ip, name, desc)
 
