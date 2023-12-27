@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload Form</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/upload.css') }}">
+</head>
+<body>
+    <div>
+        <h1> Загрузка новых Yara правил </h1>
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('v1.api_yara_upload') }}">
+            <input type="file" name="file">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

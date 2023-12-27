@@ -1,0 +1,7 @@
+{% extends 'admin/master.html' %}
+{{ super() }}
+{% block body %}
+    {% if current_user.is_authenticated %}
+        {% include "upload/upload.html" %}
+    {% endif %}
+{% endblock body %}

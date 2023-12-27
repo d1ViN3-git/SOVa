@@ -1,0 +1,23 @@
+from flask import redirect, url_for, request, session
+from flask_login import current_user
+from flask_admin.contrib.sqla import ModelView
+from flask_admin.contrib.sqla.filters import BaseSQLAFilter
+from ..models.models import SIB
+
+class UserModelView(ModelView):
+    def is_accessible(self):
+        return current_user.username == 'admin'
+
+    def inaccessible_callback(self, name, **kwargs):
+        if not self.is_accessible():
+            return redirect(url_for('login', next=request.url))
+        
+    column_list = ('id', 'username', 'password')
+    column_labels = {
+        'id' : 'id',
+        'username' : 'Имя пользователя',
+        'password' : 'hash пароля'
+    }
+    can_create = False
+    can_edit = False
+    can_delete = False
