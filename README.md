@@ -80,7 +80,7 @@ chmod +x run_scaner.sh
 ```
 Запускаем скрипт:
 ```bash
-./run.sh <listen_interface_name> <your_console_ip>
+./run_scaner.sh <listen_interface_name> <your_console_ip>
 ```
 После чего в терминале появится статус службы
 
